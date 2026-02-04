@@ -1,100 +1,354 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Valentine Proposal</title>
-    <style>
-        body {
-            text-align: center;
-            background-color: #ffe6f2;
-            font-family: Arial, sans-serif;
-            margin-top: 100px;
-            overflow: hidden;
-        }
+  <meta charset="UTF-8" />
+  <title>Valentine Proposal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        h1 {
-            font-size: 40px;
-            color: #d63384;
-            margin-bottom: 50px;
-        }
+  <style>
+    :root {
+      --pink1: #ffb6d9;
+      --pink2: #ffe6f2;
+      --pink3: #ffd1e8;
+      --accent: #d63384;
+      --accent2: #ff4da6;
+    }
 
-        .btn {
-            padding: 15px 30px;
-            font-size: 20px;
-            margin: 20px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-        }
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
 
-        #yesBtn {
-            background-color: #ff4da6;
-            color: white;
-        }
+    body {
+      font-family: "Poppins", Arial, sans-serif;
+      overflow: hidden;
+      background:
+        radial-gradient(120vmax 120vmax at 50% 60%, rgba(255,255,255,0) 70%, rgba(0,0,0,0.15)),
+        radial-gradient(40vmax 40vmax at 20% 10%, rgba(255,120,170,0.18), transparent 60%),
+        radial-gradient(35vmax 35vmax at 85% 20%, rgba(255,160,200,0.18), transparent 60%),
+        radial-gradient(30vmax 30vmax at 15% 85%, rgba(255,110,160,0.18), transparent 60%),
+        linear-gradient(135deg, var(--pink1), var(--pink2), var(--pink3));
+      background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 400% 400%;
+      animation: bgMove 16s ease infinite;
+      text-align: center;
+      padding-top: 90px;
+    }
 
-        #noBtn {
-            background-color: #666;
-            color: white;
-            position: absolute;
-        }
+    @keyframes bgMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
 
-        /* Floating Heart Style */
-        .heart {
-            position: fixed;
-            bottom: -20px;
-            color: red;
-            font-size: 25px;
-            animation: floatUp 4s linear infinite;
-        }
+    .container {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 70vh;
+      flex-direction: column;
+      gap: 20px;
+    }
 
-        @keyframes floatUp {
-            0% {
-                transform: translateY(0) scale(1);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-800px) scale(2);
-                opacity: 0;
-            }
-        }
-    </style>
+    h1 {
+      margin: 0;
+      font-size: clamp(26px, 5vw, 48px);
+      color: var(--accent);
+      text-shadow: 0 0 12px rgba(255,0,120,0.4);
+      animation: fadeIn 1.4s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-40px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .btn {
+      padding: 16px 40px;
+      font-size: 22px;
+      border: none;
+      border-radius: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s ease;
+      margin: 10px;
+    }
+
+    #yesBtn {
+      background: var(--accent2);
+      color: white;
+      box-shadow: 0 6px 18px rgba(255,0,150,0.4);
+    }
+    #yesBtn:hover {
+      transform: scale(1.08);
+      background: #ff2e8a;
+    }
+
+    #noBtn {
+      background: #444;
+      color: white;
+      position: absolute;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+    }
+
+    .heart {
+      position: fixed;
+      bottom: -20px;
+      z-index: 1;
+      animation: floatUp 4s linear infinite;
+      opacity: 0.85;
+      color: red;
+      pointer-events: none;
+    }
+
+    @keyframes floatUp {
+      0%   { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-800px) scale(2); opacity: 0; }
+    }
+
+    .message-box {
+      display: none;
+      position: fixed;
+      z-index: 5000;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.2);
+      background: white;
+      color: #c2185b;
+      font-size: 24px;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(255,0,120,0.4);
+      animation: popIn 0.8s ease forwards, glowPulse 2s infinite ease-in-out;
+      text-align: center;
+    }
+
+    @keyframes popIn {
+      0%   { transform: translate(-50%, -50%) scale(0.2); opacity: 0; }
+      70%  { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
+      100% { transform: translate(-50%, -50%) scale(1); }
+    }
+
+    @keyframes glowPulse {
+      0% { box-shadow: 0 0 15px rgba(255,0,120,0.4); }
+      50%{ box-shadow: 0 0 40px rgba(255,0,120,0.8); }
+      100%{ box-shadow: 0 0 15px rgba(255,0,120,0.4); }
+    }
+
+    .mischief {
+      position: fixed;
+      font-size: 30px;
+      animation: puff 900ms ease-out forwards;
+      pointer-events: none;
+    }
+
+    @keyframes puff {
+      0%   { opacity: 0; transform: scale(0.4); }
+      50%  { opacity: 1; transform: scale(1.2); }
+      100% { opacity: 0; transform: scale(0.4) translateY(-60px); }
+    }
+
+    /* FULL SCREEN LOVE EXPLOSION */
+    #loveExplosion {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      pointer-events: none;
+      display: none;
+      overflow: hidden;
+    }
+
+    .loveBurst {
+      position: absolute;
+      font-size: 60px;
+      animation: explode 2s ease-out forwards;
+      opacity: 0;
+    }
+
+    @keyframes explode {
+      0%   { transform: scale(0.2); opacity: 1; }
+      70%  { transform: scale(2.2); opacity: 1; }
+      100% { transform: scale(3); opacity: 0; }
+    }
+
+    .loveRain {
+      position: absolute;
+      top: -50px;
+      animation: rainFall 4s linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes rainFall {
+      0%   { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(120vh); opacity: 0; }
+    }
+
+    /* NEON GLOW LOVE TEXT (shifted down) */
+    #neonLoveText {
+      display: none;
+      position: fixed;
+      z-index: 20000;
+      top: 72%;               /* shifted down */
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: clamp(40px, 8vw, 110px);
+      font-weight: 900;
+      color: #ff2ebd;
+      white-space: nowrap;
+      text-shadow:
+        0 0 10px #ff2ebd,
+        0 0 20px #ff2ebd,
+        0 0 40px #ff2ebd,
+        0 0 80px #ff008c,
+        0 0 120px #ff008c;
+      animation: neonPulse 2s infinite ease-in-out;
+      pointer-events: none;
+    }
+
+    /* Slightly raise the neon on small screens so it remains visible */
+    @media (max-width: 480px) {
+      #neonLoveText { top: 65%; }
+    }
+
+    @keyframes neonPulse {
+      0% { opacity: 0.4; }
+      50% { opacity: 1; }
+      100% { opacity: 0.4; }
+    }
+
+  </style>
 </head>
+
 <body>
 
-    <h1>Harshada, will you be my Valentine? ❤️</h1>
+  <div id="loveExplosion"></div>
 
-    <button id="yesBtn" class="btn" onclick="alert('Yay! ❤️ Harshada said YES!')">Yes</button>
+  <audio id="bgMusic" loop>
+    https://cdn.pixabay.com/audio/2023/02/14/audio_70f0f7c4df.mp3
+  </audio>
+
+  <div class="container">
+    <h1 id="question">Harshada, will you be my Valentine? ❤️</h1>
+
+    <button id="yesBtn" class="btn">Yes</button>
     <button id="noBtn" class="btn">No</button>
+  </div>
 
-    <script>
-        // Moving NO button
-        const noBtn = document.getElementById("noBtn");
-        noBtn.addEventListener("mouseover", () => {
-            const x = Math.random() * (window.innerWidth - 100);
-            const y = Math.random() * (window.innerHeight - 100);
-            noBtn.style.left = x + "px";
-            noBtn.style.top = y + "px";
-        });
+  <div id="message" class="message-box">
+    💖 Thank you for saying YES! 💖<br><br>
+    You fill my world with love, joy and endless happiness.<br>
+    I am blessed to have you, Harshada. ❤️
+  </div>
 
-        // Floating Hearts
-        function createHeart() {
-            const heart = document.createElement("div");
-            heart.classList.add("heart");
-            heart.innerHTML = "❤️";
-            heart.style.left = Math.random() * window.innerWidth + "px";
-            heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
-            heart.style.fontSize = (Math.random() * 20 + 20) + "px";
-            document.body.appendChild(heart);
+  <!-- NEON LOVE TEXT (shifted down) -->
+  <div id="neonLoveText">I LOVE YOU HARSHADA 💗</div>
 
-            setTimeout(() => {
-                heart.remove();
-            }, 4000);
-        }
+  <script>
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+    const msg = document.getElementById("message");
+    const music = document.getElementById("bgMusic");
+    const loveDiv = document.getElementById("loveExplosion");
+    const question = document.getElementById("question"); // the heading
 
-        setInterval(createHeart, 300);
-    </script>
+    const mischiefSet = ["😜", "😏", "😈", "😂", "🤭", "🙈", "😝", "😬"];
 
+    /* Floating hearts */
+    function createHeart() {
+      const h = document.createElement("div");
+      h.className = "heart";
+      h.textContent = "❤️";
+      h.style.left = Math.random() * window.innerWidth + "px";
+      h.style.fontSize = (Math.random() * 20 + 20) + "px";
+      h.style.animationDuration = (Math.random() * 3 + 3) + "s";
+      document.body.appendChild(h);
+      setTimeout(() => h.remove(), 4000);
+    }
+    setInterval(createHeart, 350);
+
+    /* Heart burst */
+    function createHeartBurst() {
+      const x = document.createElement("div");
+      x.className = "heart";
+      x.textContent = "💖";
+      x.style.left = window.innerWidth / 2 + "px";
+      x.style.bottom = "50%";
+      x.style.fontSize = (Math.random() * 30 + 25) + "px";
+      x.style.animationDuration = (Math.random() * 2 + 1) + "s";
+      document.body.appendChild(x);
+      setTimeout(() => x.remove(), 2000);
+    }
+
+    /* FULL SCREEN EXPLOSION */
+    function startLoveExplosion() {
+      loveDiv.style.display = "block";
+
+      for (let i = 0; i < 40; i++) {
+        const burst = document.createElement("div");
+        burst.className = "loveBurst";
+        burst.textContent = ["💖", "❤️", "💘", "💕"][Math.floor(Math.random()*4)];
+        burst.style.left = Math.random() * window.innerWidth + "px";
+        burst.style.top = Math.random() * window.innerHeight + "px";
+        loveDiv.appendChild(burst);
+        setTimeout(() => burst.remove(), 2000);
+      }
+
+      for (let i = 0; i < 70; i++) {
+        const drop = document.createElement("div");
+        drop.className = "loveRain";
+        drop.textContent = ["💞","💘","❤️","🌹","💗"][Math.floor(Math.random()*5)];
+        drop.style.left = Math.random() * window.innerWidth + "px";
+        drop.style.fontSize = (Math.random() * 20 + 30) + "px";
+        drop.style.animationDuration = (Math.random() * 3 + 2.5) + "s";
+        loveDiv.appendChild(drop);
+        setTimeout(() => drop.remove(), 5000);
+      }
+    }
+
+    /* YES CLICK */
+    yesBtn.addEventListener("click", () => {
+      // Hide the question after click
+      if (question) question.style.display = "none";
+
+      // Show message box
+      msg.style.display = "block";
+
+      // Remove NO button
+      noBtn.style.display = "none";
+      noBtn.style.pointerEvents = "none";
+
+      // Play music
+      music.volume = 0.5;
+      music.play().catch(()=>{});
+
+      // Heart burst
+      for (let i = 0; i < 40; i++) createHeartBurst();
+
+      // Full screen effects
+      startLoveExplosion();
+
+      // Show neon love text (shifted down)
+      document.getElementById("neonLoveText").style.display = "block";
+    });
+
+    /* NO BUTTON MISCHIEF */
+    noBtn.addEventListener("mouseover", (e) => {
+      for (let i = 0; i < 3; i++) {
+        let m = document.createElement("div");
+        m.className = "mischief";
+        m.textContent = mischiefSet[Math.floor(Math.random() * mischiefSet.length)];
+        m.style.left = (e.clientX + Math.random() * 40 - 20) + "px";
+        m.style.top = (e.clientY + Math.random() * 40 - 20) + "px";
+        document.body.appendChild(m);
+        setTimeout(() => m.remove(), 900);
+      }
+
+      const x = Math.random() * (window.innerWidth - 100);
+      const y = Math.random() * (window.innerHeight - 100);
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+    });
+  </script>
 </body>
 </html>
-
-
