@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Valentine Proposal</title>
+    <style>
+        body {
+            text-align: center;
+            background-color: #ffe6f2;
+            font-family: Arial, sans-serif;
+            margin-top: 100px;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 40px;
+            color: #d63384;
+            margin-bottom: 50px;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            font-size: 20px;
+            margin: 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        #yesBtn {
+            background-color: #ff4da6;
+            color: white;
+        }
+
+        #noBtn {
+            background-color: #666;
+            color: white;
+            position: absolute;
+        }
+
+        /* Floating Heart Style */
+        .heart {
+            position: fixed;
+            bottom: -20px;
+            color: red;
+            font-size: 25px;
+            animation: floatUp 4s linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-800px) scale(2);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Harshada, will you be my Valentine? ❤️</h1>
+
+    <button id="yesBtn" class="btn" onclick="alert('Yay! ❤️ Harshada said YES!')">Yes</button>
+    <button id="noBtn" class="btn">No</button>
+
+    <script>
+        // Moving NO button
+        const noBtn = document.getElementById("noBtn");
+        noBtn.addEventListener("mouseover", () => {
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 100);
+            noBtn.style.left = x + "px";
+            noBtn.style.top = y + "px";
+        });
+
+        // Floating Hearts
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.innerHTML = "❤️";
+            heart.style.left = Math.random() * window.innerWidth + "px";
+            heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+            heart.style.fontSize = (Math.random() * 20 + 20) + "px";
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 4000);
+        }
+
+        setInterval(createHeart, 300);
+    </script>
+
+</body>
+</html>
