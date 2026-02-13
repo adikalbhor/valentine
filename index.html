@@ -139,33 +139,20 @@ h1{
 #message{
   display:none;
   position:fixed;
-  inset:0;                     /* full screen */
-  display:flex;
-  justify-content:center;      /* center horizontal */
-  align-items:center;          /* center vertical */
-  z-index:999999;              /* above all canvases */
-  pointer-events:none;         /* avoids blocking touches */
-}
-
-#message .box {
-  background:rgba(255,255,255,0.95);
-  padding:32px;
+  top:50%; left:50%;
+  transform:translate(-50%,-50%) scale(.2);
+  background:white;
+  padding:30px;
   border-radius:22px;
   font-size:22px;
-  max-width:90vw;
-  width:auto;
-  text-align:center;
   box-shadow:0 20px 60px rgba(255,0,120,.35);
-  border:1px solid rgba(255,255,255,.7);
-  pointer-events:auto;         /* buttons inside will work */
-  transform:scale(0.2);
   animation:popIn 1s forwards ease;
+  max-width:min(90vw,560px);
 }
-
 @keyframes popIn{
-  0%   { transform:scale(.2); opacity:0; }
-  60%  { transform:scale(1.15); opacity:1; }
-  100% { transform:scale(1); opacity:1; }
+  0%{opacity:0; transform:scale(.2)}
+  60%{opacity:1; transform:scale(1.15)}
+  100%{opacity:1; transform:scale(1)}
 }
 
 /* ================= NEON TEXT ================= */
@@ -278,11 +265,9 @@ h1{
   </div>
 
   <div id="message">
-  <div class="box">
     💖 Thank you for saying YES, Harshada! 💖<br><br>
     You make my life complete ❤️
   </div>
-</div>
 
   <div id="neonLoveText">I LOVE YOU HARSHADA 💗</div>
 
@@ -541,6 +526,3 @@ modalClose.onclick=()=>{
 </script>
 </body>
 </html>
-
-
-
