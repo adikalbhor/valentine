@@ -139,25 +139,33 @@ h1{
 #message{
   display:none;
   position:fixed;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%) scale(.2); /* scaled at start */
-  background:rgba(255,255,255,0.92);
-  padding:30px 32px;
+  inset:0;                     /* full screen */
+  display:flex;
+  justify-content:center;      /* center horizontal */
+  align-items:center;          /* center vertical */
+  z-index:999999;              /* above all canvases */
+  pointer-events:none;         /* avoids blocking touches */
+}
+
+#message .box {
+  background:rgba(255,255,255,0.95);
+  padding:32px;
   border-radius:22px;
   font-size:22px;
+  max-width:90vw;
+  width:auto;
   text-align:center;
-  max-width:min(90vw, 560px);
   box-shadow:0 20px 60px rgba(255,0,120,.35);
   border:1px solid rgba(255,255,255,.7);
-  z-index:9999;             /* <-- keeps it on top of all layers */
+  pointer-events:auto;         /* buttons inside will work */
+  transform:scale(0.2);
   animation:popIn 1s forwards ease;
-
 }
+
 @keyframes popIn{
-  0%{opacity:0; transform:scale(.2)}
-  60%{opacity:1; transform:scale(1.15)}
-  100%{opacity:1; transform:scale(1)}
+  0%   { transform:scale(.2); opacity:0; }
+  60%  { transform:scale(1.15); opacity:1; }
+  100% { transform:scale(1); opacity:1; }
 }
 
 /* ================= NEON TEXT ================= */
@@ -531,4 +539,5 @@ modalClose.onclick=()=>{
 </script>
 </body>
 </html>
+
 
